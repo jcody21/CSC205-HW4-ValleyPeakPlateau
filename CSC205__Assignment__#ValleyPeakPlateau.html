@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0055)http://azfoo.net/gdt/csc205/assignments/02019/vpp.shtml -->
+<html class="gr__azfoo_net"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<title>CSC205::Assignment::#ValleyPeakPlateau</title>
+
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="description" content="find the valleys and peaks in an int array">
+<meta name="keywords" content="">
+<meta name="owner" content="gthurman@gmail.com">
+
+<link rel="stylesheet" type="text/css" href="./CSC205__Assignment__#ValleyPeakPlateau_files/tui.css">
+
+</head><body data-gr-c-s-loaded="true">
+
+<table border="3" cellpadding="5" cellspacing="5" align="center">
+<tbody><tr>
+<td>Assignment: <strong>#ValleyPeakPlateau</strong></td>
+<td>Due: <b>02/10/02019</b></td>
+<td>Points:  <b>3</b></td>
+</tr></tbody></table>
+
+<h3>Specification</h3>
+<blockquote>
+<p>
+Copy the program <a href="http://azfoo.net/gdt/csc205/assignments/02019/ValleyPeakPlateau.java.txt">ValleyPeakPlateau.java</a>
+to your computer and implement the method named 
+<b>valley_peak_plateau(int[])</b>.
+</p>
+<p>
+The <b>static void valley_peak_plateau(int[] a)</b> method prints to the 
+standard output stream the valleys, peaks, and plateaus found in 
+the <b>int[] a</b> parameter. Only arrays having two or more elements 
+are processed.
+</p>
+<p>
+The following are definitions for <i>valley</i>, 
+<i>peak</i>, and <i>plateau</i>.  Note:  A <i>plateau</i>
+is when a number occurs three or more consecutive times
+in an array.
+</p>
+<b><pre>   note:
+      int[] a ... an array of ints of named a
+      int n ... the length of array a, where n &#8805; 2 
+      int i ... index into array a
+
+   when i is 0
+      a[i] is valley if a[i] less than a[i+1]
+      a[i] is peak if a[i] greater than a[i+1]
+      a[i] is plateau if a[i] equals a[i+1] and a[i+2]
+
+   when 0 &lt; i &lt; n - 1
+      a[i] is valley if a[i] is less than both a[i-1] and a[i+1]
+      a[i] is peak if a[i] is greater than both a[i-1] and a[i+1]
+      a[i] is plateau if a[i] equals both a[i-1] and a[i+1]
+           note:  a[i-1] is the start of the plateau and the
+                  plateau ends when the number changes (or end 
+                  of array is reached) -- see the output if 
+                  clarification is needed
+
+   when i is n - 1
+      a[i] is valley if a[i] less than a[i-1]
+      a[i] is peak if a[i] greater than a[i-1]
+      a[i] is plateau if a[i] equals a[i-1] and a[i-2]
+</pre></b>
+<h5>The Program's Output</h5>
+<p>
+The output of the program must match the following.
+{<a href="http://azfoo.net/gdt/csc205/assignments/02019/vpp.out.txt">output file</a>}
+</p>
+<pre>
+array: { 3, 5, 4, 4, 4, 4, 2, 6, 5, 5, 5, 5, 4, 4, 4, 4, 7, 2, 4, 6, 5, }
+[0]=3 is a valley
+[1]=5 is a peak
+[2]=4 is a plateau
+[3]=4 is a plateau
+[4]=4 is a plateau
+[5]=4 is a plateau
+[6]=2 is a valley
+[7]=6 is a peak
+[8]=5 is a plateau
+[9]=5 is a plateau
+[10]=5 is a plateau
+[11]=5 is a plateau
+[12]=4 is a plateau
+[13]=4 is a plateau
+[14]=4 is a plateau
+[15]=4 is a plateau
+[16]=7 is a peak
+[17]=2 is a valley
+[19]=6 is a peak
+[20]=5 is a valley
+
+array: { 9, 9, 9, 9, 9, 4, 7, 9, 9, 9, 9, 2, 9, 9, 9, 9, 9, }
+[0]=9 is a plateau
+[1]=9 is a plateau
+[2]=9 is a plateau
+[3]=9 is a plateau
+[4]=9 is a plateau
+[5]=4 is a valley
+[7]=9 is a plateau
+[8]=9 is a plateau
+[9]=9 is a plateau
+[10]=9 is a plateau
+[11]=2 is a valley
+[12]=9 is a plateau
+[13]=9 is a plateau
+[14]=9 is a plateau
+[15]=9 is a plateau
+[16]=9 is a plateau
+
+array: { 0, 5, 7, 7, 7, 4, 8, 7, 7, 7, 10, 2, 6, }
+[0]=0 is a valley
+[2]=7 is a plateau
+[3]=7 is a plateau
+[4]=7 is a plateau
+[5]=4 is a valley
+[6]=8 is a peak
+[7]=7 is a plateau
+[8]=7 is a plateau
+[9]=7 is a plateau
+[10]=10 is a peak
+[11]=2 is a valley
+[12]=6 is a peak
+
+array: { 2, 8, 8, 8, 7, 9, 9, 9, 9, 9, 3, }
+[0]=2 is a valley
+[1]=8 is a plateau
+[2]=8 is a plateau
+[3]=8 is a plateau
+[4]=7 is a valley
+[5]=9 is a plateau
+[6]=9 is a plateau
+[7]=9 is a plateau
+[8]=9 is a plateau
+[9]=9 is a plateau
+[10]=3 is a valley
+
+array: { 1, 9, 3, 5, 2, 7, 3, 5, 1, }
+[0]=1 is a valley
+[1]=9 is a peak
+[2]=3 is a valley
+[3]=5 is a peak
+[4]=2 is a valley
+[5]=7 is a peak
+[6]=3 is a valley
+[7]=5 is a peak
+[8]=1 is a valley
+
+array: { 2, 5, 3, 2, 1, 9, 7, 8, }
+[0]=2 is a valley
+[1]=5 is a peak
+[4]=1 is a valley
+[5]=9 is a peak
+[6]=7 is a valley
+[7]=8 is a peak
+
+array: { 4, 4, 7, 4, 4, 4, 2, }
+[2]=7 is a peak
+[3]=4 is a plateau
+[4]=4 is a plateau
+[5]=4 is a plateau
+[6]=2 is a valley
+
+array: { 2, 5, 3, 3, 7, 2, }
+[0]=2 is a valley
+[1]=5 is a peak
+[4]=7 is a peak
+[5]=2 is a valley
+
+array: { 1, 1, 1, 2, 0, 9, }
+[0]=1 is a plateau
+[1]=1 is a plateau
+[2]=1 is a plateau
+[3]=2 is a peak
+[4]=0 is a valley
+[5]=9 is a peak
+
+array: { 9, 0, 2, 1, 1, 1, }
+[0]=9 is a peak
+[1]=0 is a valley
+[2]=2 is a peak
+[3]=1 is a plateau
+[4]=1 is a plateau
+[5]=1 is a plateau
+
+array: { 1, 2, 3, 3, 2, 1, }
+[0]=1 is a valley
+[5]=1 is a valley
+
+array: { 1, 2, 5, 9, 10, }
+[0]=1 is a valley
+[4]=10 is a peak
+
+array: { 4, 3, 2, 1, 0, }
+[0]=4 is a peak
+[4]=0 is a valley
+
+array: { 7, 7, 7, 7, }
+[0]=7 is a plateau
+[1]=7 is a plateau
+[2]=7 is a plateau
+[3]=7 is a plateau
+
+array: { 6, 5, 5, 5, }
+[0]=6 is a peak
+[1]=5 is a plateau
+[2]=5 is a plateau
+[3]=5 is a plateau
+
+array: { 3, 3, 3, 9, }
+[0]=3 is a plateau
+[1]=3 is a plateau
+[2]=3 is a plateau
+[3]=9 is a peak
+
+array: { 1, 3, 2, }
+[0]=1 is a valley
+[1]=3 is a peak
+[2]=2 is a valley
+
+array: { 3, 2, 1, }
+[0]=3 is a peak
+[2]=1 is a valley
+
+array: { 1, 2, }
+[0]=1 is a valley
+[1]=2 is a peak
+
+array: { 7, 5, }
+[0]=7 is a peak
+[1]=5 is a valley
+
+array: { 6, 6, }
+
+array: { 1, } (skipped)
+
+array: { } (skipped)
+
+</pre>
+</blockquote>
+
+</body><span class="gr__tooltip"><span class="gr__tooltip-content"></span><i class="gr__tooltip-logo"></i><span class="gr__triangle"></span></span></html>
